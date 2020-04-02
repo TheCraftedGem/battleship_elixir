@@ -7,7 +7,7 @@ defmodule Battleship.Board do
 
   def generate_cells() do
     letters = ?A..?J |> Enum.to_list() |> List.to_string() |> String.codepoints()
-    numbers = 1..10 |> Enum.to_list()
+    numbers = 1..10  |> Enum.to_list()
 
     Enum.reduce(letters, %{}, fn letter, acc ->
       Enum.reduce(numbers, acc, fn number, acc ->
@@ -18,11 +18,8 @@ defmodule Battleship.Board do
   end
 
   def place_ship(board, ship, [coordinate]) do
-    current_cell = board.cells[coordinate]
-    something = Cell.place_ship(current_cell, ship)
-    cells = %{board.cells | coordinate =>  something}
+    cell = board.cells[coordinate]
+    cells = %{board.cells | coordinate =>  Cell.place_ship(cell, ship)}
     %{board | cells: cells}
   end
-
-
 end
