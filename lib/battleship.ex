@@ -1,0 +1,2 @@
+defmodule Battleship do
+end
