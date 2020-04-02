@@ -17,9 +17,13 @@ defmodule Battleship.Board do
     end)
   end
 
-  def place_ship(board, ship, [coordinate]) do
-    cell = board.cells[coordinate]
-    cells = %{board.cells | coordinate =>  Cell.place_ship(cell, ship)}
+  def place_ship(board, ship, coordinates) do
+    cells = coordinates
+    |> Enum.reduce(board.cells, fn coordinate, acc ->
+        cell = board.cells[coordinate]
+          %{acc |  coordinate =>  Cell.place_ship(cell, ship)}
+      end)
     %{board | cells: cells}
+
   end
 end

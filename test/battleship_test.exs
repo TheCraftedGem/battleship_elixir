@@ -112,14 +112,16 @@ defmodule BattleshipTest do
     board = Board.new(:player)
     carrier = Ship.new(:carrier)
 
-    coordinate = ["A1"]
-    board = board
-    |> Board.place_ship(carrier, coordinate)
+    coordinates = ["A1", "A2", "A3", "A4", "A5"]
+
+    board =
+      board
+      |> Board.place_ship(carrier, coordinates)
 
     assert board.cells["A1"].state == :occupied
-    # assert board.cells["A2"].state == :occupied
-    # assert board.cells["A3"].state == :occupied
-    # assert board.cells["A4"].state == :occupied
-    # assert board.cells["A5"].state == :occupied
+    assert board.cells["A2"].state == :occupied
+    assert board.cells["A3"].state == :occupied
+    assert board.cells["A4"].state == :occupied
+    assert board.cells["A5"].state == :occupied
   end
 end
