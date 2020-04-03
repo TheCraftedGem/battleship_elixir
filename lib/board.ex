@@ -61,10 +61,10 @@ defmodule Battleship.Board do
       Enum.sort(letters)
       |> List.to_charlist()
 
-    first_number = hd(input)
+    first_letter = hd(input)
 
-    valid_numbers = first_number..(first_number + Enum.count(input) - 1) |> Enum.to_list()
-    valid_numbers == input
+    valid_letters = first_letter..(first_letter + Enum.count(input) - 1) |> Enum.to_list()
+    valid_letters == input
   end
 
   def valid_vertical?(coordinates) do
