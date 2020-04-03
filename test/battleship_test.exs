@@ -73,16 +73,16 @@ defmodule BattleshipTest do
     assert render == "/"
   end
 
-  # test "can fire upon cell and damage ship and renders accordingly" do
-  #   carrier = Ship.new(:carrier)
+  test "can fire upon cell and damage ship and renders accordingly" do
+    carrier = Ship.new(:carrier)
 
-  #   cell = Cell.new("A1")
-  #   |> Cell.place_ship(carrier)
+    cell = Cell.new("A1")
+    |> Cell.place_ship(carrier)
 
-  #   render = cell
-  #   |> Cell.render()
-  #   assert render == "H"
-  # end
+    render = cell
+    |> Cell.render()
+    assert render == "H"
+  end
 
   test "cell renders X for sunk ship" do
     carrier =
@@ -123,5 +123,47 @@ defmodule BattleshipTest do
     assert board.cells["A3"].state == :occupied
     assert board.cells["A4"].state == :occupied
     assert board.cells["A5"].state == :occupied
+  end
+
+  test "validate vertical ship placement" do
+    board = Board.new(:player)
+    carrier = Ship.new(:carrier)
+
+    coordinates = ["A1", "A9", "A6", "A4", "B5"]
+
+    placement =
+      board
+      |> Board.valid_placement?(carrier, coordinates)
+
+    assert placement == false
+
+    coordinates = ["A1", "A2", "A3", "A4", "A5"]
+
+    placement =
+      board
+      |> Board.valid_placement?(carrier, coordinates)
+
+    assert placement == true
+  end
+
+  test "validate horizontal ship placement" do
+    board = Board.new(:player)
+    carrier = Ship.new(:carrier)
+
+    coordinates = ["A1", "B9", "C6", "D4", "F5"]
+
+    placement =
+      board
+      |> Board.valid_placement?(carrier, coordinates)
+
+    assert placement == false
+
+    coordinates = ["A1", "B1", "C1", "D1", "E1"]
+
+    placement =
+      board
+      |> Board.valid_placement?(carrier, coordinates)
+
+    assert placement == true
   end
 end
