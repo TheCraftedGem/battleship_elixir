@@ -76,11 +76,14 @@ defmodule BattleshipTest do
   test "can fire upon cell and damage ship and renders accordingly" do
     carrier = Ship.new(:carrier)
 
-    cell = Cell.new("A1")
-    |> Cell.place_ship(carrier)
+    cell =
+      Cell.new("A1")
+      |> Cell.place_ship(carrier)
 
-    render = cell
-    |> Cell.render()
+    render =
+      cell
+      |> Cell.render()
+
     assert render == "H"
   end
 

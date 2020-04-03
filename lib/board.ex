@@ -29,11 +29,12 @@ defmodule Battleship.Board do
   end
 
   def valid_placement?(board, ship, coordinates) do
-    ship.length == Enum.count(coordinates) && (valid_vertical?(coordinates) || valid_horizontal?(coordinates))
+    ship.length == Enum.count(coordinates) &&
+      (valid_vertical?(coordinates) || valid_horizontal?(coordinates))
   end
 
   def valid_horizontal?(coordinates) do
-      letters =
+    letters =
       coordinates
       |> Enum.map(fn coordinate -> coordinate |> String.first() end)
 
@@ -51,12 +52,12 @@ defmodule Battleship.Board do
 
   def valid_horizontal_letters?(letters) do
     input =
-    Enum.sort(letters)
-    |> List.to_charlist()
+      Enum.sort(letters)
+      |> List.to_charlist()
 
     first_number = hd(input)
 
-    valid_numbers = first_number..(first_number + Enum.count(input) -1) |> Enum.to_list()
+    valid_numbers = first_number..(first_number + Enum.count(input) - 1) |> Enum.to_list()
     valid_numbers == input
   end
 
@@ -74,12 +75,12 @@ defmodule Battleship.Board do
 
   def valid_vertical_numbers?(numbers) do
     input =
-    Enum.sort(numbers)
-    |> List.to_charlist()
+      Enum.sort(numbers)
+      |> List.to_charlist()
 
     first_number = hd(input)
 
-    valid_numbers = first_number..(first_number + Enum.count(input) -1) |> Enum.to_list()
+    valid_numbers = first_number..(first_number + Enum.count(input) - 1) |> Enum.to_list()
     valid_numbers == input
   end
 
