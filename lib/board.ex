@@ -30,7 +30,13 @@ defmodule Battleship.Board do
 
   def valid_placement?(board, ship, coordinates) do
     ship.length == Enum.count(coordinates) &&
-      (valid_vertical?(coordinates) || valid_horizontal?(coordinates))
+      (valid_vertical?(coordinates) || valid_horizontal?(coordinates)) &&
+      coordinates_within_board?(board, coordinates)
+  end
+
+  def coordinates_within_board?(board, coordinates) do
+    coordinates
+    |> Enum.all?(fn coordinate -> coordinate in  Map.keys(board.cells) end)
   end
 
   def valid_horizontal?(coordinates) do

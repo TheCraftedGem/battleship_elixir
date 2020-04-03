@@ -80,8 +80,17 @@ defmodule BattleshipTest do
       Cell.new("A1")
       |> Cell.place_ship(carrier)
 
+
+
     render =
       cell
+      |> Cell.render()
+
+    assert render == "/"
+
+    render =
+      cell
+      |> Cell.fire_upon()
       |> Cell.render()
 
     assert render == "H"
@@ -168,5 +177,27 @@ defmodule BattleshipTest do
       |> Board.valid_placement?(carrier, coordinates)
 
     assert placement == true
+  end
+
+
+  test "validate cant place outside board" do
+    board = Board.new(:player)
+    carrier = Ship.new(:carrier)
+
+    coordinates = ["A1", "B11", "C6", "D4", "F5"]
+
+    placement =
+      board
+      |> Board.valid_placement?(carrier, coordinates)
+
+    assert placement == false
+
+    coordinates = ["A11", "B11", "C11", "D11", "E11"]
+
+    placement =
+      board
+      |> Board.valid_placement?(carrier, coordinates)
+
+    assert placement == false
   end
 end
